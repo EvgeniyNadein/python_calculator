@@ -1,0 +1,13 @@
+#Виртуальное окружение
+.venv/
+venv/
+env/
+
+# Скомпилированные файлы Pytnon
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Файлы ОС
+.DS_Store
+Thumbs.db
