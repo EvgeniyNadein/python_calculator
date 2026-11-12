@@ -9,7 +9,7 @@ def get_number(prompt):
 def main():
     print("--- Консольный калькулятор ---")
     print("Для выхода из программы введите 'выход' вместо первого числа.")
-    print("Доступные операции: +, -, *, /, ** (степень)")
+    print("Доступные операции: +, -, *, /, ** (степень), % (остаток от деления)")
 
     while True:
         print("\n--- Новое вычисление ---")
@@ -48,6 +48,11 @@ def main():
                 print("Ошибка: Деление на ноль невозможно!")
                 continue
             result = num1 / num2
+        elif operator == '%':
+            if num2 == 0:
+                print("Ошибка: Остаток от деления на ноль невозможен!")
+                continue
+            result = num1 % num2
 
         if result.is_integer():
             result = int(result)
