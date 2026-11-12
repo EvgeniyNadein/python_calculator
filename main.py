@@ -28,7 +28,7 @@ def main():
 
         num2 = get_number("Введите второе число: ")
 
-        valid_operators = ('+', '-', '*', '/', '**')
+        valid_operators = ('+', '-', '*', '/', '**', '%')
         while True:
             operator = input(f"Выберите операцию {valid_operators}: ").strip()
             if operator in valid_operators:
