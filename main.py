@@ -1,3 +1,4 @@
+# Автор: Надеин Е.М., группа ПРЗ-23, 14.11.2026
 def get_number(prompt):
     while True:
         try:
