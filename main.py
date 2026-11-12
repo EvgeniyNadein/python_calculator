@@ -9,6 +9,7 @@ def get_number(prompt):
 def main():
     print("--- Консольный калькулятор ---")
     print("Для выхода из программы введите 'выход' вместо первого числа.")
+    print("Доступные операции: +, -, *, /, ** (степень)")
 
     while True:
         print("\n--- Новое вычисление ---")
@@ -27,7 +28,7 @@ def main():
 
         num2 = get_number("Введите второе число: ")
 
-        valid_operators = ('+', '-', '*', '/')
+        valid_operators = ('+', '-', '*', '/', '**')
         while True:
             operator = input(f"Выберите операцию {valid_operators}: ").strip()
             if operator in valid_operators:
@@ -40,6 +41,8 @@ def main():
             result = num1 - num2
         elif operator == '*':
             result = num1 * num2
+        elif operator == '**':
+            result = num1 ** num2
         elif operator == '/':
             if num2 == 0:
                 print("Ошибка: Деление на ноль невозможно!")
