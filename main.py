@@ -1,63 +1,61 @@
 # Автор: Надеин Е.М., группа ПРЗ-23, 14.11.2026
-def get_number(prompt):
+import calc_logic
+from typing import Optional
+
+def get_number(prompt: str) -> Optional[float]:
+    """
+    Запрашивает у пользователя число с обработкой ошибок.
+    Возвращает None, если пользователь ввел 'выход'.
+    """
     while True:
+        user_input = input(prompt).strip().lower()
+        if user_input == "выход":
+            return None
         try:
-            return float(input(prompt))
+            return float(user_input)
         except ValueError:
-            print("Ошибка: Пожалуйста, введите корректное число (используйте точку для дробей).")
+            print("Ошибка: введите корректное число или 'выход'!")
 
 def main():
-    print("--- Консольный калькулятор ---")
-    print("Для выхода из программы введите 'выход' вместо первого числа.")
-    print("Доступные операции: +, -, *, /, ** (степень), % (остаток от деления)")
+    print("=== Модульный Калькулятор v2.0 ===")
+    print("Для завершения работы введите 'выход' на любом этапе.\n")
 
     while True:
-        print("\n--- Новое вычисление ---")
+        num1 = get_number("Введите первое число: ")
+        if num1 is None:
+            break
 
-        user_input = input("Введите первое число (или 'выход'): ").strip().lower()
-        if user_input == 'выход':
-            print("Программа завершена. До свидания!")
+        num2 = get_number("Введите второе число: ")
+        if num2 is None:
+            break
+
+        operation = input("Выберите операцию (+, -, *, /, **, %): ").strip().lower()
+        if operation == "выход":
             break
 
         try:
-            num1 = float(user_input)
-        except ValueError:
-            print("Ошибка: Пожалуйста, введите корректное число или 'выход'.")
-            continue
-
-
-        num2 = get_number("Введите второе число: ")
-
-        valid_operators = ('+', '-', '*', '/', '**', '%')
-        while True:
-            operator = input(f"Выберите операцию {valid_operators}: ").strip()
-            if operator in valid_operators:
-                break
-            print("Ошибка: Неверная операция. Пожалуйста, выберите из списка.")
-
-        if operator == '+':
-            result = num1 + num2
-        elif operator == '-':
-            result = num1 - num2
-        elif operator == '*':
-            result = num1 * num2
-        elif operator == '**':
-            result = num1 ** num2
-        elif operator == '/':
-            if num2 == 0:
-                print("Ошибка: Деление на ноль невозможно!")
+            if operation == '+':
+                result = calc_logic.add(num1, num2)
+            elif operation == '-':
+                result = calc_logic.subtract(num1, num2)
+            elif operation == '*':
+                result = calc_logic.multiply(num1, num2)
+            elif operation == '/':
+                result = calc_logic.divide(num1, num2)
+            elif operation == '**':
+                result = calc_logic.power(num1, num2)
+            elif operation == '%':
+                result = calc_logic.modulo(num1, num2)
+            else:
+                print("Неизвестная операция! Попробуйте снова.\n")
                 continue
-            result = num1 / num2
-        elif operator == '%':
-            if num2 == 0:
-                print("Ошибка: Остаток от деления на ноль невозможен!")
-                continue
-            result = num1 % num2
 
-        if result.is_integer():
-            result = int(result)
+            print(f"Результат: {result}\n")
 
-        print(f"Результат: {num1} {operator} {num2} = {result}")
+        except ValueError as e:
+            print(f"Ошибка вычисления: {e}\n")
+
+    print("Работа калькулятора завершена.")
 
 if __name__ == "__main__":
     main()
